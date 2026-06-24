@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "ai-dynamic-pricing"
+version = "1.0.0"
+description = "Enterprise-grade AI-Powered Dynamic Pricing Optimization System with demand forecasting, RL pricing agents, competitor intelligence, and explainable AI"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "AI Pricing Research Team", email = "research@dynamic-pricing.ai" }]
+keywords = ["dynamic-pricing", "revenue-optimization", "reinforcement-learning", "demand-forecasting", "pricing-strategy", "mlops"]
+requires-python = ">=3.10"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Office/Business :: Financial",
+]
+
+[project.scripts]
+pricing-cli = "app.cli:main"
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N", "UP", "B"]
+ignore = ["S101"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--cov=app --cov=models --cov-report=term-missing"

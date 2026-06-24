@@ -1,0 +1,7 @@
+name: dynamic-pricing
+channels: [pytorch, conda-forge, defaults]
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - -r requirements.txt

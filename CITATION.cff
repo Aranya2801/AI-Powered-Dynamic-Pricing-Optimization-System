@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "AI-Powered Dynamic Pricing Optimization System"
+version: 1.0.0
+date-released: "2025-06-01"
+license: MIT
+url: "https://github.com/ai-dynamic-pricing/ai-dynamic-pricing"
+repository-code: "https://github.com/ai-dynamic-pricing/ai-dynamic-pricing"
+keywords:
+  - dynamic-pricing
+  - revenue-optimization
+  - reinforcement-learning
+  - demand-forecasting
+  - pricing-strategy
+  - mlops
+  - explainable-ai
+abstract: >
+  Enterprise-grade AI dynamic pricing platform combining demand forecasting
+  (XGBoost/LightGBM/CatBoost/Prophet/LSTM/GRU/Transformer), elasticity-based
+  revenue optimization, reinforcement learning pricing agents (DQN/PPO/Bandit),
+  customer segmentation, anomaly detection, explainable AI (SHAP/LIME),
+  competitor intelligence, and a generative AI pricing advisor, across 10
+  industries including e-commerce, retail, airline, and hotel pricing.
+authors:
+  - family-names: "Pricing Research Team"
+    given-names: "AI"
+    email: "research@dynamic-pricing.ai"

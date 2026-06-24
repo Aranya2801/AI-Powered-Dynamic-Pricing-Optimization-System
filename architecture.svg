@@ -1,0 +1,45 @@
+<svg width="100%" viewBox="0 0 700 620" xmlns="http://www.w3.org/2000/svg">
+<rect width="700" height="620" fill="#0a0e1a"/>
+<text fill="#a78bfa" font-family="sans-serif" font-size="15" font-weight="500" x="350" y="26" text-anchor="middle">AI Dynamic Pricing System — Architecture</text>
+<rect x="40" y="44" width="620" height="58" rx="10" fill="#0d4b3f" stroke="#1d9e75" stroke-width="0.5"/>
+<text fill="#9fe1cb" font-size="13" font-family="sans-serif" x="350" y="64" text-anchor="middle" font-weight="500">Data Sources</text>
+<text fill="#5dcaa5" font-size="11" font-family="sans-serif" x="350" y="86" text-anchor="middle">Sales History · Inventory · Competitor Scraper/API · Customer Behavior · Weather/Calendar</text>
+<rect x="40" y="126" width="620" height="58" rx="10" fill="#0c2b5c" stroke="#185fa5" stroke-width="0.5"/>
+<text fill="#b5d4f4" font-size="13" font-family="sans-serif" x="350" y="146" text-anchor="middle" font-weight="500">Data Engineering Layer</text>
+<text fill="#85b7eb" font-size="11" font-family="sans-serif" x="350" y="168" text-anchor="middle">ETL (Polars/DuckDB) · Validation · Feature Store · raw/processed/features</text>
+<rect x="40" y="208" width="190" height="92" rx="10" fill="#241a4d" stroke="#6b4fc9" stroke-width="0.5"/>
+<text fill="#d6c9fa" font-size="13" font-family="sans-serif" x="135" y="228" text-anchor="middle" font-weight="500">Demand Forecasting</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="135" y="248" text-anchor="middle">XGBoost · LightGBM</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="135" y="264" text-anchor="middle">CatBoost · Prophet</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="135" y="280" text-anchor="middle">LSTM · GRU · Transformer</text>
+<rect x="246" y="208" width="190" height="92" rx="10" fill="#241a4d" stroke="#6b4fc9" stroke-width="0.5"/>
+<text fill="#d6c9fa" font-size="13" font-family="sans-serif" x="341" y="228" text-anchor="middle" font-weight="500">Pricing Engine</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="341" y="248" text-anchor="middle">Elasticity Modeling</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="341" y="264" text-anchor="middle">Revenue Optimization</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="341" y="280" text-anchor="middle">Inventory-Aware Pricing</text>
+<rect x="452" y="208" width="208" height="92" rx="10" fill="#241a4d" stroke="#6b4fc9" stroke-width="0.5"/>
+<text fill="#d6c9fa" font-size="13" font-family="sans-serif" x="556" y="228" text-anchor="middle" font-weight="500">RL Pricing Agent</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="556" y="248" text-anchor="middle">DQN · PPO</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="556" y="264" text-anchor="middle">Multi-Armed Bandit</text>
+<text fill="#b29ef0" font-size="10.5" font-family="sans-serif" x="556" y="280" text-anchor="middle">Simulated Pricing Env</text>
+<rect x="40" y="324" width="300" height="64" rx="10" fill="#3a2800" stroke="#ba7517" stroke-width="0.5"/>
+<text fill="#fac775" font-size="12.5" font-family="sans-serif" x="190" y="344" text-anchor="middle" font-weight="500">Segmentation &amp; Anomaly Detection</text>
+<text fill="#ef9f27" font-size="10.5" font-family="sans-serif" x="190" y="364" text-anchor="middle">KMeans/DBSCAN/Hierarchical · IsoForest/AE/OCSVM</text>
+<rect x="360" y="324" width="300" height="64" rx="10" fill="#3a2800" stroke="#ba7517" stroke-width="0.5"/>
+<text fill="#fac775" font-size="12.5" font-family="sans-serif" x="510" y="344" text-anchor="middle" font-weight="500">Explainable AI &amp; GenAI Advisor</text>
+<text fill="#ef9f27" font-size="10.5" font-family="sans-serif" x="510" y="364" text-anchor="middle">SHAP · LIME · Claude/OpenAI Strategy Advisor</text>
+<rect x="40" y="414" width="300" height="56" rx="10" fill="#3d1208" stroke="#993c1d" stroke-width="0.5"/>
+<text fill="#f5c4b3" font-size="12.5" font-family="sans-serif" x="190" y="436" text-anchor="middle" font-weight="500">FastAPI Backend</text>
+<text fill="#f0997b" font-size="10.5" font-family="sans-serif" x="190" y="456" text-anchor="middle">JWT Auth · RBAC · Rate Limiting</text>
+<rect x="360" y="414" width="300" height="56" rx="10" fill="#3d1208" stroke="#993c1d" stroke-width="0.5"/>
+<text fill="#f5c4b3" font-size="12.5" font-family="sans-serif" x="510" y="436" text-anchor="middle" font-weight="500">Streamlit Dashboard</text>
+<text fill="#f0997b" font-size="10.5" font-family="sans-serif" x="510" y="456" text-anchor="middle">7 analytics pages</text>
+<rect x="40" y="494" width="300" height="50" rx="10" fill="#1c1c1a" stroke="#5f5e5a" stroke-width="0.5"/>
+<text fill="#d3d1c7" font-size="12" font-family="sans-serif" x="190" y="514" text-anchor="middle" font-weight="500">PostgreSQL + Redis</text>
+<text fill="#b3b1a8" font-size="10.5" font-family="sans-serif" x="190" y="532" text-anchor="middle">Pricing history · cache</text>
+<rect x="360" y="494" width="300" height="50" rx="10" fill="#1c1c1a" stroke="#5f5e5a" stroke-width="0.5"/>
+<text fill="#d3d1c7" font-size="12" font-family="sans-serif" x="510" y="514" text-anchor="middle" font-weight="500">MLflow + DVC</text>
+<text fill="#b3b1a8" font-size="10.5" font-family="sans-serif" x="510" y="532" text-anchor="middle">Experiment &amp; data versioning</text>
+<rect x="40" y="570" width="620" height="40" rx="10" fill="#0d4b3f" stroke="#1d9e75" stroke-width="0.5"/>
+<text fill="#9fe1cb" font-size="11" font-family="sans-serif" x="350" y="594" text-anchor="middle">Docker · Docker Compose · AWS / Azure / GCP · GitHub Actions CI/CD</text>
+</svg>

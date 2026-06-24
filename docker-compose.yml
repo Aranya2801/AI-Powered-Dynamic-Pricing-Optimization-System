@@ -1,0 +1,115 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    image: dynamic-pricing/api:1.0.0
+    container_name: pricing_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=postgresql://pricing_admin:${POSTGRES_PASSWORD:-changeme}@postgres:5432/dynamic_pricing
+      - REDIS_HOST=redis
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - API_SECRET_KEY=${API_SECRET_KEY:-change-this-in-production}
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks: [pricing_net]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    image: dynamic-pricing/frontend:1.0.0
+    container_name: pricing_frontend
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE=http://api:8000
+    depends_on: [api]
+    networks: [pricing_net]
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: pricing_postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=pricing_admin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+      - POSTGRES_DB=dynamic_pricing
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    networks: [pricing_net]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pricing_admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: pricing_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks: [pricing_net]
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.9.2
+    container_name: pricing_mlflow
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    command: >
+      mlflow server --host 0.0.0.0 --port 5000
+      --backend-store-uri sqlite:///mlflow/mlflow.db
+      --default-artifact-root /mlflow/artifacts
+    volumes:
+      - mlflow_data:/mlflow
+    networks: [pricing_net]
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: pricing_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [api, frontend]
+    networks: [pricing_net]
+
+networks:
+  pricing_net:
+    name: dynamic_pricing_network
+
+volumes:
+  pg_data:
+    name: dynamic_pricing_pg_data
+  redis_data:
+    name: dynamic_pricing_redis_data
+  mlflow_data:
+    name: dynamic_pricing_mlflow_data
